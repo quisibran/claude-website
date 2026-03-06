@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book · QB Media</title>
+  <meta name="description" content="Schedule a consultation with QB Media — professional A/V services across Hawaii." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a1a;
+      --ink-mid:   #4a4a4a;
+      --muted:     #909090;
+      --rule:      #e2e2e2;
+      --bg:        #ffffff;
+      --bg-soft:   #f8f8f6;
+      --font-head: 'Raleway', sans-serif;
+      --font-body: 'Lato', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px);
+      padding: 1rem 0;
+      box-shadow: 0 1px 0 var(--rule);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, 90%);
+      margin-inline: auto;
+    }
+
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo-img { height: 36px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      border: 1px solid var(--ink) !important;
+      color: var(--ink) !important;
+      padding: 0.5rem 1.5rem !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--ink) !important;
+      color: #fff !important;
+    }
+
+    /* ── Booking Layout ───────────────────────────────────────── */
+    .booking-wrap {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 280px 1fr 260px;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── Sidebar ──────────────────────────────────────────────── */
+    .booking-sidebar {
+      border-right: 1px solid var(--rule);
+      padding: 3rem 2.5rem;
+      background: var(--bg-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .sidebar-eyebrow {
+      font-family: var(--font-head);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-head);
+      font-size: 1.45rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-top: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .sidebar-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      font-weight: 300;
+    }
+
+    .meta-item svg { flex-shrink: 0; opacity: 0.45; }
+
+    .sidebar-divider { height: 1px; background: var(--rule); }
+
+    .sidebar-desc {
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .sidebar-services {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .sidebar-services span {
+      font-size: 0.78rem;
+      color: var(--ink-mid);
+      font-family: var(--font-head);
+      letter-spacing: 0.06em;
+    }
+
+    .sidebar-services span::before {
+      content: '— ';
+      color: var(--rule);
+    }
+
+    /* ── Calendar ─────────────────────────────────────────────── */
+    .booking-calendar {
+      padding: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .panel-label {
+      font-family: var(--font-head);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+    }
+
+    .cal-month {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .cal-arrow {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-mid);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cal-arrow:hover { background: var(--bg-soft); border-color: var(--ink-mid); }
+    .cal-arrow:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+
+    .cal-day-name {
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.5rem 0 0.75rem;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 400;
+      cursor: pointer;
+      color: var(--ink);
+      background: none;
+      border: none;
+      position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .cal-day:hover:not(.cal-day--empty):not(.cal-day--past) {
+      background: var(--bg-soft);
+    }
+
+    .cal-day--today { border: 1px solid var(--rule); }
+
+    .cal-day--selected {
+      background: var(--ink) !important;
+      color: #fff !important;
+    }
+
+    .cal-day--past,
+    .cal-day--empty {
+      color: var(--rule);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .cal-day--available::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .cal-day--selected::after { display: none; }
+
+    .cal-timezone {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--ink-mid);
+      font-weight: 300;
+    }
+
+    .cal-timezone svg { opacity: 0.45; flex-shrink: 0; }
+
+    /* ── Time Slots ───────────────────────────────────────────── */
+    .booking-times {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .times-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 200px);
+    }
+
+    .time-slot {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: none;
+      border: 1px solid var(--rule);
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      text-align: center;
+    }
+
+    .time-slot:hover { background: var(--bg-soft); border-color: var(--ink-mid); }
+    .time-slot--selected { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .times-placeholder {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+      margin-top: 2rem;
+      line-height: 1.9;
+    }
+
+    /* ── Step 2: Event form ───────────────────────────────────── */
+    .booking-form-panel {
+      display: none;
+      grid-column: 2 / 4;
+      padding: 3rem;
+      border-left: none;
+    }
+
+    .booking-form-panel.active { display: block; }
+
+    .form-subheading {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      max-width: 640px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-family: var(--font-head);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--ink);
+      outline: none;
+      border-radius: 0;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--ink-mid); }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.9rem 2.4rem;
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn-dark:hover { background: transparent; color: var(--ink); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.9rem 2.4rem;
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--rule);
+      background: none;
+      color: var(--ink-mid);
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+    /* ── Step 3: Confirmation ─────────────────────────────────── */
+    .booking-confirm {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 6rem 3rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .booking-confirm.active { display: flex; }
+
+    .confirm-icon {
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      color: var(--ink);
+    }
+
+    .confirm-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .confirm-detail {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      font-weight: 300;
+    }
+
+    .confirm-note {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: 2.5rem 0;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      width: min(1120px, 90%);
+      margin-inline: auto;
+    }
+
+    .footer-logo-img { height: 28px; width: auto; filter: invert(1); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+    .footer-socials { display: flex; gap: 0.75rem; }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-link:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .booking-wrap { grid-template-columns: 1fr; }
+      .booking-sidebar { border-right: none; border-bottom: 1px solid var(--rule); }
+      .booking-calendar { border-right: none; border-bottom: 1px solid var(--rule); }
+      .booking-form-panel { grid-column: 1; }
+      .booking-confirm { grid-column: 1; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .booking-calendar { padding: 2rem 1.5rem; }
+      .booking-times { padding: 2rem 1.5rem; }
+      .booking-form-panel { padding: 2rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <header>
+    <nav id="nav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="QB.svg" class="nav-logo-img" alt="QB Media" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#testimonials">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── Booking ─────────────────────────────────────────────── -->
+  <div class="booking-wrap" id="bookingWrap">
+
+    <!-- Sidebar -->
+    <aside class="booking-sidebar">
+      <div>
+        <span class="sidebar-eyebrow">QB Media</span>
+        <h1 class="sidebar-title">Book Your<br>Consultation</h1>
+      </div>
+
+      <div class="sidebar-meta">
+        <div class="meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          <span>30 minute call</span>
+        </div>
+        <div class="meta-item" id="sidebarDateRow" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span id="sidebarDateText"></span>
+        </div>
+        <div class="meta-item" id="sidebarTimeRow" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3"/>
+          </svg>
+          <span id="sidebarTimeText"></span>
+        </div>
+        <div class="meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Koloa, HI — Available Statewide</span>
+        </div>
+        <div class="meta-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>(808) 652-2372</span>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <p class="sidebar-desc">
+        Let's talk about your event. Schedule a quick call to discuss your vision, timeline, and which A/V services best fit your needs.
+      </p>
+
+      <div class="sidebar-services">
+        <span>Live Sound Engineering</span>
+        <span>DJ Services</span>
+        <span>Video Production</span>
+        <span>Lighting Design</span>
+        <span>Live Streaming</span>
+        <span>Screen &amp; Projection</span>
+        <span>Recording Services</span>
+      </div>
+    </aside>
+
+    <!-- Calendar -->
+    <div class="booking-calendar" id="calendarPanel">
+      <p class="panel-label">Select Date &amp; Time</p>
+
+      <div class="cal-nav">
+        <button class="cal-arrow" id="calPrev" aria-label="Previous month">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <span class="cal-month" id="calMonthLabel"></span>
+        <button class="cal-arrow" id="calNext" aria-label="Next month">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div class="cal-timezone">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+          <path d="M2 12h20"/>
+        </svg>
+        GMT-10:00 Pacific/Honolulu (HST)
+      </div>
+    </div>
+
+    <!-- Time Slots -->
+    <div class="booking-times" id="timesPanel">
+      <p class="panel-label" id="timesLabel">Available Times</p>
+      <div class="times-list" id="timesList">
+        <p class="times-placeholder">Select a date<br>to view available times</p>
+      </div>
+    </div>
+
+    <!-- Step 2: Form -->
+    <div class="booking-form-panel" id="formPanel">
+      <p class="panel-label">Your Event Details</p>
+      <p class="form-subheading" id="formSubheading"></p>
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Kai" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Makoa" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="kai@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(808) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label for="eventType">Event Type</label>
+            <select id="eventType" name="eventType" required>
+              <option value="">Select…</option>
+              <option>Wedding</option>
+              <option>Concert / Live Music</option>
+              <option>Corporate Event</option>
+              <option>Private Party</option>
+              <option>Festival</option>
+              <option>Church / Worship</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="location">Event Location</label>
+            <input type="text" id="location" name="location" placeholder="Koloa, Kauai" />
+          </div>
+          <div class="form-group full">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Estimated attendance, specific equipment needs, venue details, event date…"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-dark">Confirm Booking</button>
+          <button type="button" class="btn-ghost" id="backBtn">&#8592; Back</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Confirmation -->
+    <div class="booking-confirm" id="confirmPanel">
+      <div class="confirm-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h2 class="confirm-title">You're Booked</h2>
+      <p class="confirm-detail" id="confirmDate"></p>
+      <p class="confirm-detail" id="confirmTime"></p>
+      <p class="confirm-note">A confirmation will be sent to your email. We look forward to connecting.</p>
+      <a href="index.html" class="btn-dark" style="margin-top:2.5rem;">Return Home</a>
+    </div>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <img src="QB.svg" class="footer-logo-img" alt="QB Media" />
+      <p class="footer-copy">&copy; 2026 Kristian Bran DBA QB Media. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link" aria-label="Instagram">📸</a>
+        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+        <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const TIMES  = ['08:00 AM','08:30 AM','09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','12:00 PM','01:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM'];
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    let viewYear  = today.getFullYear();
+    let viewMonth = today.getMonth();
+    let selectedDate = null;
+    let selectedTime = null;
+
+    const calMonthLabel = document.getElementById('calMonthLabel');
+    const calGrid       = document.getElementById('calGrid');
+    const calPrev       = document.getElementById('calPrev');
+    const calNext       = document.getElementById('calNext');
+    const timesList     = document.getElementById('timesList');
+    const timesLabel    = document.getElementById('timesLabel');
+
+    function renderCalendar() {
+      calMonthLabel.textContent = `${MONTHS[viewMonth]} ${viewYear}`;
+      calPrev.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+      calGrid.innerHTML = '';
+
+      DAYS.forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'cal-day-name';
+        el.textContent = d;
+        calGrid.appendChild(el);
+      });
+
+      const firstDay    = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const el = document.createElement('button');
+        el.className = 'cal-day cal-day--empty';
+        el.disabled = true;
+        calGrid.appendChild(el);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const btn  = document.createElement('button');
+        btn.className = 'cal-day';
+        btn.textContent = d;
+
+        const date = new Date(viewYear, viewMonth, d);
+        const dow  = date.getDay();
+
+        if (date < today || dow === 0) {
+          btn.classList.add('cal-day--past');
+          btn.disabled = true;
+        } else {
+          if (date.toDateString() === today.toDateString()) btn.classList.add('cal-day--today');
+          btn.classList.add('cal-day--available');
+          if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
+            btn.classList.add('cal-day--selected');
+          }
+          btn.addEventListener('click', () => selectDate(date));
+        }
+
+        calGrid.appendChild(btn);
+      }
+    }
+
+    function selectDate(date) {
+      selectedDate = date;
+      selectedTime = null;
+      renderCalendar();
+      renderTimes();
+      updateSidebar();
+    }
+
+    function renderTimes() {
+      timesList.innerHTML = '';
+
+      if (!selectedDate) {
+        timesList.innerHTML = '<p class="times-placeholder">Select a date<br>to view available times</p>';
+        return;
+      }
+
+      timesLabel.textContent = selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+      TIMES.forEach(t => {
+        const btn = document.createElement('button');
+        btn.className = 'time-slot' + (selectedTime === t ? ' time-slot--selected' : '');
+        btn.textContent = t;
+        btn.addEventListener('click', () => selectTime(t));
+        timesList.appendChild(btn);
+      });
+    }
+
+    function selectTime(time) {
+      selectedTime = time;
+      renderTimes();
+      updateSidebar();
+      setTimeout(showFormStep, 280);
+    }
+
+    function updateSidebar() {
+      const dateRow = document.getElementById('sidebarDateRow');
+      const timeRow = document.getElementById('sidebarTimeRow');
+
+      if (selectedDate) {
+        document.getElementById('sidebarDateText').textContent =
+          selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+        dateRow.style.display = 'flex';
+      }
+
+      if (selectedTime) {
+        document.getElementById('sidebarTimeText').textContent = selectedTime + ' HST';
+        timeRow.style.display = 'flex';
+      }
+    }
+
+    function showFormStep() {
+      document.getElementById('calendarPanel').style.display = 'none';
+      document.getElementById('timesPanel').style.display   = 'none';
+      const fp = document.getElementById('formPanel');
+      fp.classList.add('active');
+      document.getElementById('formSubheading').textContent =
+        selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) +
+        ' · ' + selectedTime + ' HST';
+    }
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+      document.getElementById('formPanel').classList.remove('active');
+      document.getElementById('calendarPanel').style.display = '';
+      document.getElementById('timesPanel').style.display   = '';
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      document.getElementById('formPanel').classList.remove('active');
+
+      const sidebar = document.querySelector('.booking-sidebar');
+      sidebar.style.display = 'none';
+      document.getElementById('bookingWrap').style.gridTemplateColumns = '1fr';
+
+      document.getElementById('confirmDate').textContent =
+        selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('confirmTime').textContent = selectedTime + ' HST';
+
+      document.getElementById('confirmPanel').classList.add('active');
+    });
+
+    calPrev.addEventListener('click', () => {
+      viewMonth--;
+      if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      renderCalendar();
+    });
+
+    calNext.addEventListener('click', () => {
+      viewMonth++;
+      if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+
+</body>
+</html>
