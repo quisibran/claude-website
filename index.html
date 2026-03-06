@@ -180,6 +180,13 @@
       background: linear-gradient(170deg, #0d2233 0%, #0a1920 50%, #071318 100%);
     }
 
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
     .hero-bg::after {
       content: '';
       position: absolute;
@@ -875,7 +882,11 @@
 
   <!-- ── Hero ──────────────────────────────────────────────── -->
   <section id="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="Tunnels copy.mov" type="video/mp4" />
+    </video>
+  </div>
     <div class="hero-content">
       <span class="hero-tag">Based in Hawaii &bull; Available Statewide</span>
       <h1 class="hero-title">
