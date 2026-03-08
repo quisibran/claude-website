@@ -674,6 +674,12 @@
       <p class="panel-label">Your Event Details</p>
       <p class="form-subheading" id="formSubheading"></p>
       <form id="bookingForm">
+        <!-- Web3Forms config — replace access_key with yours from web3forms.com -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+        <input type="hidden" name="subject" value="New Booking Request — QB Media" />
+        <input type="hidden" name="redirect" value="false" />
+        <input type="hidden" name="booking_date" id="hiddenDate" />
+        <input type="hidden" name="booking_time" id="hiddenTime" />
         <div class="form-grid">
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -714,9 +720,10 @@
           </div>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn-dark">Confirm Booking</button>
+          <button type="submit" class="btn-dark" id="submitBtn">Confirm Booking</button>
           <button type="button" class="btn-ghost" id="backBtn">&#8592; Back</button>
         </div>
+        <p id="formError" style="display:none; margin-top:1rem; font-size:0.82rem; color:#c0392b;"></p>
       </form>
     </div>
 
@@ -879,20 +886,45 @@
       document.getElementById('timesPanel').style.display   = '';
     });
 
-    document.getElementById('bookingForm').addEventListener('submit', e => {
+    document.getElementById('bookingForm').addEventListener('submit', async e => {
       e.preventDefault();
 
-      document.getElementById('formPanel').classList.remove('active');
-
-      const sidebar = document.querySelector('.booking-sidebar');
-      sidebar.style.display = 'none';
-      document.getElementById('bookingWrap').style.gridTemplateColumns = '1fr';
-
-      document.getElementById('confirmDate').textContent =
+      // Populate hidden date/time fields
+      document.getElementById('hiddenDate').value =
         selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-      document.getElementById('confirmTime').textContent = selectedTime + ' HST';
+      document.getElementById('hiddenTime').value = selectedTime + ' HST';
 
-      document.getElementById('confirmPanel').classList.add('active');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorEl  = document.getElementById('formError');
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled    = true;
+      errorEl.style.display = 'none';
+
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body:   new FormData(e.target)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById('formPanel').classList.remove('active');
+          document.querySelector('.booking-sidebar').style.display = 'none';
+          document.getElementById('bookingWrap').style.gridTemplateColumns = '1fr';
+
+          document.getElementById('confirmDate').textContent =
+            selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+          document.getElementById('confirmTime').textContent = selectedTime + ' HST';
+          document.getElementById('confirmPanel').classList.add('active');
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      } catch (err) {
+        errorEl.textContent = 'Something went wrong. Please try again or call (808) 652-2372.';
+        errorEl.style.display = 'block';
+        submitBtn.textContent = 'Confirm Booking';
+        submitBtn.disabled    = false;
+      }
     });
 
     calPrev.addEventListener('click', () => {
