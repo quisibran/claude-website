@@ -767,6 +767,24 @@
     let selectedDate = null;
     let selectedTime = null;
 
+    // Parse a time slot string like "01:00 PM" into minutes since midnight
+    function parseSlotMinutes(t) {
+      const [time, period] = t.split(' ');
+      let [h, m] = time.split(':').map(Number);
+      if (period === 'PM' && h !== 12) h += 12;
+      if (period === 'AM' && h === 12) h = 0;
+      return h * 60 + m;
+    }
+
+    // Get available slots for a date (filters past times for today, using HST)
+    function getAvailableSlots(date) {
+      const isToday = date.toDateString() === today.toDateString();
+      if (!isToday) return TIMES;
+      const nowHST = new Date(new Date().toLocaleString('en-US', { timeZone: 'Pacific/Honolulu' }));
+      const nowMinutes = nowHST.getHours() * 60 + nowHST.getMinutes() + 30; // 30-min buffer
+      return TIMES.filter(t => parseSlotMinutes(t) > nowMinutes);
+    }
+
     const calMonthLabel = document.getElementById('calMonthLabel');
     const calGrid       = document.getElementById('calGrid');
     const calPrev       = document.getElementById('calPrev');
@@ -804,7 +822,7 @@
         const date = new Date(viewYear, viewMonth, d);
         const dow  = date.getDay();
 
-        if (date < today || dow === 0) {
+        if (date < today || dow === 0 || getAvailableSlots(date).length === 0) {
           btn.classList.add('cal-day--past');
           btn.disabled = true;
         } else {
@@ -838,7 +856,13 @@
 
       timesLabel.textContent = selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 
-      TIMES.forEach(t => {
+      const slots = getAvailableSlots(selectedDate);
+      if (slots.length === 0) {
+        timesList.innerHTML = '<p class="times-placeholder">No times available today.<br>Please select another date.</p>';
+        return;
+      }
+
+      slots.forEach(t => {
         const btn = document.createElement('button');
         btn.className = 'time-slot' + (selectedTime === t ? ' time-slot--selected' : '');
         btn.textContent = t;
@@ -901,6 +925,27 @@
       errorEl.style.display = 'none';
 
       try {
+        const form = e.target;
+        const bookingDate = selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+        const bookingTime = selectedTime + ' HST';
+
+        // Send to Make.com webhook (Google Calendar)
+        fetch('https://hook.us2.make.com/uygyzkq8awddmwue6e0etxac3v60p1f3', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            first_name:   form.firstName.value,
+            last_name:    form.lastName.value,
+            email:        form.email.value,
+            phone:        form.phone.value,
+            event_type:   form.eventType.value,
+            location:     form.location.value,
+            notes:        form.notes.value,
+            booking_date: bookingDate,
+            booking_time: bookingTime
+          })
+        }).catch(() => {}); // non-blocking, fail silently
+
         const res  = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           body:   new FormData(e.target)
