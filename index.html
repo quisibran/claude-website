@@ -849,6 +849,10 @@
         color: rgba(255,255,255,0.75);
       }
       .nav-links.open .nav-cta { margin: 0.5rem 1.5rem; display: inline-flex; }
+      /* Force white text in open menu even when scrolled */
+      #nav .nav-links.open a { color: rgba(255,255,255,0.85) !important; }
+      #nav .nav-links.open a:hover { color: #fff !important; }
+      #nav .nav-links.open .nav-cta { border-color: rgba(255,255,255,0.6) !important; color: #fff !important; }
 
       /* Hero */
       .hero-content { padding: 6rem 1.25rem 4rem; }
