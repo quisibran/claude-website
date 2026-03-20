@@ -135,6 +135,45 @@
 
     .nav-links a:hover { color: #fff; }
 
+    /* ── Dropdown ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; }
+    .nav-dropdown > a::after {
+      content: '';
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-right: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      opacity: 0.6;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,27,34,0.97);
+      backdrop-filter: blur(10px);
+      min-width: 160px;
+      border: 1px solid rgba(255,255,255,0.08);
+      list-style: none;
+      padding: 0.4rem 0;
+    }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.66rem;
+      color: rgba(255,255,255,0.75) !important;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+    .dropdown-menu li a:hover { color: #fff !important; background: rgba(255,255,255,0.05); }
+    #nav.scrolled .dropdown-menu { background: rgba(255,255,255,0.97); border-color: var(--rule); }
+    #nav.scrolled .dropdown-menu li a { color: var(--ink-mid) !important; }
+    #nav.scrolled .dropdown-menu li a:hover { color: var(--ink) !important; }
+
     .nav-cta {
       border: 1px solid rgba(255,255,255,0.75) !important;
       color: #fff !important;
@@ -910,8 +949,13 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="videography.html">Videography</a></li>
+          <li class="nav-dropdown">
+            <a href="#portfolio">Portfolio</a>
+            <ul class="dropdown-menu">
+              <li><a href="#portfolio">All Work</a></li>
+              <li><a href="videography.html">Videography</a></li>
+            </ul>
+          </li>
           <li><a href="#testimonials">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="https://calendar.app.google/GeNsUdXbCRWXtxg9A" target="_blank" class="nav-cta">Book Now</a></li>
@@ -1266,7 +1310,7 @@
       </div>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 6:43 PM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 7:11 PM HST</span>
     </div>
   </footer>
 
