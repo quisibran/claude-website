@@ -937,6 +937,60 @@
       .testimonial-card { padding: 2rem; }
       .contact-form { padding: 1.25rem; }
     }
+
+    /* ── Dropdown JS-open ── */
+    .nav-dropdown.js-open .dropdown-menu { display: block; }
+    @media (max-width: 768px) {
+      .nav-links.open .nav-dropdown.js-open .dropdown-menu {
+        position: static;
+        transform: none;
+        background: rgba(255,255,255,0.05);
+        border: none;
+        border-left: 2px solid rgba(255,255,255,0.15);
+        margin: 0 0 0.5rem 1.5rem;
+        min-width: auto;
+      }
+    }
+
+    /* ── Featured By ── */
+    .featured-strip {
+      background: var(--bg-soft);
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .featured-label {
+      font-family: var(--font-head);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1.75rem;
+      display: block;
+    }
+    .featured-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .featured-logos img {
+      height: 44px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      opacity: 0.5;
+      filter: grayscale(1);
+      transition: opacity 0.25s, filter 0.25s;
+    }
+    .featured-logos img:hover { opacity: 0.85; filter: grayscale(0); }
+    @media (max-width: 480px) {
+      .featured-logos { gap: 2rem; }
+      .featured-logos img { height: 32px; }
+    }
   </style>
 </head>
 <body>
@@ -990,6 +1044,18 @@
     </div>
     <div class="hero-scroll">Scroll</div>
   </section>
+
+  <!-- ── Featured By ─────────────────────────────────────── -->
+  <div class="featured-strip">
+    <div class="container">
+      <span class="featured-label">Work Featured By</span>
+      <div class="featured-logos">
+        <img src="Hawaii_Warriors_logo.svg.png" alt="Hawaii Warriors" />
+        <img src="Unknown-removebg-preview.png" alt="Featured Partner" />
+        <img src="logoNEW2 copy (3).png" alt="Featured Partner" />
+      </div>
+    </div>
+  </div>
 
   <!-- ── About ─────────────────────────────────────────────── -->
   <section id="about">
@@ -1311,7 +1377,7 @@
       </div>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 7:13 PM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 8:15 PM HST</span>
     </div>
   </footer>
 
@@ -1326,7 +1392,26 @@
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+      a.addEventListener('click', function() {
+        if (!this.parentElement.classList.contains('nav-dropdown')) {
+          links.classList.remove('open');
+        }
+      });
+    });
+
+    // Dropdown: click/tap support (works on desktop + mobile)
+    document.querySelectorAll('.nav-dropdown > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const parent = this.parentElement;
+        const isOpen = parent.classList.contains('js-open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('js-open'));
+        if (!isOpen) { e.preventDefault(); parent.classList.add('js-open'); }
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('js-open'));
+      }
     });
 
     const filterBtns = document.querySelectorAll('.filter-btn');
