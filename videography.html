@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videography | QB Media Hawaii</title>
+  <link rel="icon" href="QB-4.svg" type="image/svg+xml" />
+  <meta name="description" content="Sports and lifestyle videography by QB Media Hawaii — O'ahu, HI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a1a;
+      --ink-mid:   #4a4a4a;
+      --muted:     #909090;
+      --rule:      #e2e2e2;
+      --bg:        #ffffff;
+      --bg-soft:   #f8f8f6;
+      --hero-dark: #0d1b22;
+      --font-head: 'Raleway', sans-serif;
+      --font-body: 'Lato', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, 90%);
+      margin-inline: auto;
+    }
+
+    /* ── Nav ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 0;
+      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    }
+    #nav.scrolled {
+      background: #fff;
+      box-shadow: 0 1px 0 var(--rule);
+      padding: 0.7rem 0;
+    }
+    #nav.scrolled .nav-logo-img { filter: none; }
+    #nav.scrolled .nav-links a { color: var(--ink-mid); }
+    #nav.scrolled .nav-links a:hover { color: var(--ink); }
+    #nav.scrolled .nav-cta { border-color: var(--ink) !important; color: var(--ink) !important; }
+    #nav.scrolled .nav-toggle span { background: var(--ink); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 2px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.72rem !important;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover {
+      background: #fff;
+      color: var(--ink) !important;
+      border-color: #fff !important;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+
+    /* ── Page Hero ── */
+    .page-hero {
+      background: var(--hero-dark);
+      color: #fff;
+      padding: 9rem 0 5rem;
+      text-align: center;
+    }
+    .page-hero .section-label {
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 200;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .page-hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+
+    /* ── Filters ── */
+    .filters-wrap {
+      padding: 3rem 0 0;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      background: none;
+      color: var(--muted);
+      padding: 0.45rem 1.1rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    /* ── Grid ── */
+    .video-section { padding: 2.5rem 0 6rem; }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--bg-soft);
+      aspect-ratio: 16/9;
+      cursor: pointer;
+    }
+    .video-card iframe,
+    .video-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none;
+    }
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .video-placeholder svg { width: 36px; height: 36px; opacity: 0.2; }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,27,34,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .video-card:hover .video-overlay { opacity: 1; }
+
+    .video-info h4 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+    .video-info span {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── CTA ── */
+    .cta-strip {
+      background: var(--hero-dark);
+      color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      padding: 0.85rem 2.2rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-primary { background: #fff; color: var(--ink); }
+    .btn-primary:hover { background: rgba(255,255,255,0.85); }
+    .btn-outline {
+      border-color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.85);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover {
+      border-color: #fff;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #0a0a0a;
+      color: rgba(255,255,255,0.35);
+      padding: 2.5rem 0;
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo img { height: 24px; opacity: 0.4; filter: brightness(0) invert(1); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-links { display: none; flex-direction: column; gap: 0; }
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(13,27,34,0.97);
+        padding: 5rem 1.5rem 2rem;
+        z-index: 99;
+        align-items: flex-start;
+      }
+      .nav-links.open li { width: 100%; }
+      .nav-links.open a {
+        display: block;
+        padding: 0.9rem 0;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .nav-links.open .nav-cta { margin: 0.5rem 0; display: inline-flex; }
+      #nav .nav-links.open a { color: rgba(255,255,255,0.85) !important; }
+      #nav .nav-links.open a:hover { color: #fff !important; }
+      #nav .nav-links.open .nav-cta { border-color: rgba(255,255,255,0.6) !important; color: #fff !important; }
+
+      .video-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav id="nav">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-logo"><img src="QB-4.svg" class="nav-logo-img" alt="QB Media" /></a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="videography.html" style="color:#fff;">Videography</a></li>
+          <li><a href="index.html#testimonials">Reviews</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="https://calendar.app.google/GeNsUdXbCRWXtxg9A" target="_blank" class="nav-cta">Book Now</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── Page Hero ── -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">QB Media Hawaii</span>
+      <h1>Videography</h1>
+      <p>Sports, lifestyle, and everything in between — captured on O'ahu and across the islands.</p>
+    </div>
+  </div>
+
+  <!-- ── Video Grid ── -->
+  <section class="video-section">
+    <div class="container">
+      <div class="filters-wrap">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="sports">Sports</button>
+        <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+      </div>
+
+      <div class="video-grid">
+
+        <div class="video-card" data-category="sports">
+          <div class="video-placeholder">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M15 10l4.553-2.277A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/>
+            </svg>
+            <span>Add Video</span>
+          </div>
+          <div class="video-overlay">
+            <div class="video-info">
+              <h4>Sports Reel 2025</h4>
+              <span>Sports Videography</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card" data-category="lifestyle">
+          <div class="video-placeholder">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M15 10l4.553-2.277A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/>
+            </svg>
+            <span>Add Video</span>
+          </div>
+          <div class="video-overlay">
+            <div class="video-info">
+              <h4>Lifestyle Reel 2025</h4>
+              <span>Lifestyle</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card" data-category="sports">
+          <div class="video-placeholder">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                d="M15 10l4.553-2.277A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M4 6h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/>
+            </svg>
+            <span>Add Video</span>
+          </div>
+          <div class="video-overlay">
+            <div class="video-info">
+              <h4>Game Day Highlights</h4>
+              <span>Sports Videography</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div class="cta-strip">
+    <div class="container">
+      <h2>Ready to work together?</h2>
+      <a href="https://calendar.app.google/GeNsUdXbCRWXtxg9A" target="_blank" class="btn btn-primary">Book a Call</a>
+      <a href="index.html#contact" class="btn btn-outline">Send a Message</a>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo"><img src="QB-4.svg" alt="QB Media" /></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <span>© 2025 QB Media Hawaii</span>
+    </div>
+    <div class="container" style="text-align:right; margin-top:1rem;">
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 6:38 PM HST</span>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.video-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
