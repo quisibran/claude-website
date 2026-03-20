@@ -48,13 +48,14 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.1rem 0;
-      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+      padding: 1.6rem 0;
+      transition: background 0.4s, padding 0.3s, box-shadow 0.3s;
     }
     #nav.scrolled {
-      background: #fff;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px);
+      padding: 1rem 0;
       box-shadow: 0 1px 0 var(--rule);
-      padding: 0.7rem 0;
     }
     #nav.scrolled .nav-logo-img { filter: none; }
     #nav.scrolled .nav-links a { color: var(--ink-mid); }
@@ -67,56 +68,107 @@
       align-items: center;
       justify-content: space-between;
     }
+    .nav-logo { display: flex; align-items: center; }
     .nav-logo-img {
       height: 36px;
       width: auto;
-      filter: brightness(0) invert(1);
+      filter: invert(1);
       transition: filter 0.3s;
     }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
     .nav-links a {
       font-family: var(--font-head);
-      font-size: 0.78rem;
+      font-size: 0.68rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.8);
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #fff; }
+
+    /* ── Dropdown ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; }
+    .nav-dropdown > a::after {
+      content: '';
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-right: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      opacity: 0.6;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,27,34,0.97);
+      backdrop-filter: blur(10px);
+      min-width: 160px;
+      border: 1px solid rgba(255,255,255,0.08);
+      list-style: none;
+      padding: 0.4rem 0;
+    }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.66rem;
+      color: rgba(255,255,255,0.75) !important;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+    .dropdown-menu li a:hover { color: #fff !important; background: rgba(255,255,255,0.05); }
+    #nav.scrolled .dropdown-menu { background: rgba(255,255,255,0.97); border-color: var(--rule); }
+    #nav.scrolled .dropdown-menu li a { color: var(--ink-mid) !important; }
+    #nav.scrolled .dropdown-menu li a:hover { color: var(--ink) !important; }
+    .nav-dropdown.js-open .dropdown-menu { display: block; }
+    @media (max-width: 768px) {
+      .nav-links.open .nav-dropdown.js-open .dropdown-menu {
+        position: static;
+        transform: none;
+        background: rgba(255,255,255,0.05);
+        border: none;
+        border-left: 2px solid rgba(255,255,255,0.15);
+        margin: 0 0 0.5rem 1.5rem;
+        min-width: auto;
+      }
+    }
+
     .nav-cta {
-      border: 1px solid rgba(255,255,255,0.55);
-      border-radius: 2px;
-      padding: 0.4rem 1.1rem;
-      font-size: 0.72rem !important;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      border: 1px solid rgba(255,255,255,0.75) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.5rem !important;
+      font-weight: 500 !important;
+      transition: background 0.2s, color 0.2s !important;
     }
     .nav-cta:hover {
-      background: #fff;
+      background: #fff !important;
       color: var(--ink) !important;
-      border-color: #fff !important;
     }
     .nav-toggle {
       display: none;
       flex-direction: column;
       gap: 5px;
-      background: none;
-      border: none;
       cursor: pointer;
       padding: 4px;
+      background: none;
+      border: none;
     }
     .nav-toggle span {
       display: block;
       width: 22px;
-      height: 2px;
+      height: 1.5px;
       background: #fff;
-      border-radius: 2px;
-      transition: background 0.3s;
+      transition: all 0.3s;
     }
 
     /* ── Page Hero ── */
@@ -347,8 +399,13 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#portfolio">Portfolio</a></li>
-          <li><a href="videography.html" style="color:#fff;">Videography</a></li>
+          <li class="nav-dropdown">
+            <a href="index.html#portfolio">Portfolio</a>
+            <ul class="dropdown-menu">
+              <li><a href="index.html#portfolio">All Work</a></li>
+              <li><a href="videography.html">Videography</a></li>
+            </ul>
+          </li>
           <li><a href="index.html#testimonials">Reviews</a></li>
           <li><a href="index.html#contact">Contact</a></li>
           <li><a href="https://calendar.app.google/GeNsUdXbCRWXtxg9A" target="_blank" class="nav-cta">Book Now</a></li>
@@ -495,7 +552,7 @@
       <span>© 2025 QB Media Hawaii</span>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 7:53 PM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Mar 19, 2026 · 8:15 PM HST</span>
     </div>
   </footer>
 
@@ -509,7 +566,26 @@
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+      a.addEventListener('click', function() {
+        if (!this.parentElement.classList.contains('nav-dropdown')) {
+          links.classList.remove('open');
+        }
+      });
+    });
+
+    // Dropdown: click/tap support (works on desktop + mobile)
+    document.querySelectorAll('.nav-dropdown > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const parent = this.parentElement;
+        const isOpen = parent.classList.contains('js-open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('js-open'));
+        if (!isOpen) { e.preventDefault(); parent.classList.add('js-open'); }
+      });
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('js-open'));
+      }
     });
 
     const filterBtns = document.querySelectorAll('.filter-btn');
