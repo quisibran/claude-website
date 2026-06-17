@@ -811,6 +811,50 @@
       color: var(--ink);
     }
 
+    /* ── Instagram Strip ─────────────────────────────────────── */
+    .instagram-strip {
+      margin-top: 3.5rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .instagram-strip-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .instagram-strip-header .section-label { margin-bottom: 0; }
+
+    .instagram-handle {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .instagram-handle:hover { color: var(--ink); }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .instagram-grid .instagram-media {
+      width: 100% !important;
+      min-width: unset !important;
+      margin: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+      .instagram-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Footer ───────────────────────────────────────────────── */
     footer {
       background: var(--ink);
@@ -1168,6 +1212,26 @@
           <h3>DJ Services</h3>
           <p>Professional DJ services for weddings, corporate events, private parties, and live performances across the Hawaiian Islands.</p>
         </div>
+      <!-- Instagram strip -->
+      <div class="instagram-strip">
+        <div class="instagram-strip-header">
+          <span class="section-label">Follow the Work</span>
+          <a href="https://www.instagram.com/qbmediahi/" class="instagram-handle" target="_blank" rel="noopener">@qbmediahi</a>
+        </div>
+        <div class="instagram-grid">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/DLeGK0hOXZl/"
+            data-instgrm-version="14"></blockquote>
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DRHOJQdke0k/"
+            data-instgrm-version="14"></blockquote>
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/DVsH04slDjQ/"
+            data-instgrm-version="14"></blockquote>
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/DXCzwyUgbot/"
+            data-instgrm-version="14"></blockquote>
+        </div>
       </div>
     </div>
   </section>
@@ -1398,6 +1462,8 @@
   </footer>
 
   <!-- ── JavaScript ─────────────────────────────────────────── -->
+  <script async src="https://www.instagram.com/embed.js"></script>
+
   <script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
