@@ -838,22 +838,70 @@
 
     .instagram-handle:hover { color: var(--ink); }
 
-    .instagram-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      align-items: start;
+    .instagram-carousel-wrapper { position: relative; }
+
+    .instagram-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 1.5rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 0.25rem;
     }
 
-    .instagram-grid .instagram-media {
-      width: 100% !important;
+    .instagram-carousel::-webkit-scrollbar { display: none; }
+
+    .instagram-carousel .instagram-media {
+      flex: 0 0 min(420px, 85vw);
+      width: min(420px, 85vw) !important;
       min-width: unset !important;
       margin: 0 !important;
+      scroll-snap-align: center;
     }
 
-    @media (max-width: 768px) {
-      .instagram-grid { grid-template-columns: 1fr; }
+    .carousel-btn {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.2s;
+      font-size: 1rem;
     }
+
+    .carousel-btn:hover { opacity: 0.75; }
+    .carousel-btn.prev { left: -1.2rem; }
+    .carousel-btn.next { right: -1.2rem; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rule);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.2s;
+    }
+
+    .carousel-dot.active { background: var(--ink); }
 
     /* ── Footer ───────────────────────────────────────────────── */
     footer {
@@ -1212,25 +1260,35 @@
           <h3>DJ Services</h3>
           <p>Professional DJ services for weddings, corporate events, private parties, and live performances across the Hawaiian Islands.</p>
         </div>
-      <!-- Instagram strip -->
+      <!-- Instagram carousel -->
       <div class="instagram-strip">
         <div class="instagram-strip-header">
           <span class="section-label">Follow the Work</span>
           <a href="https://www.instagram.com/qbmediahi/" class="instagram-handle" target="_blank" rel="noopener">@qbmediahi</a>
         </div>
-        <div class="instagram-grid">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DLeGK0hOXZl/"
-            data-instgrm-version="14"></blockquote>
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DRHOJQdke0k/"
-            data-instgrm-version="14"></blockquote>
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DVsH04slDjQ/"
-            data-instgrm-version="14"></blockquote>
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DXCzwyUgbot/"
-            data-instgrm-version="14"></blockquote>
+        <div class="instagram-carousel-wrapper">
+          <button class="carousel-btn prev" aria-label="Previous">&#8592;</button>
+          <div class="instagram-carousel" id="igCarousel">
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/p/DLeGK0hOXZl/"
+              data-instgrm-version="14"></blockquote>
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/reel/DRHOJQdke0k/"
+              data-instgrm-version="14"></blockquote>
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/p/DVsH04slDjQ/"
+              data-instgrm-version="14"></blockquote>
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/p/DXCzwyUgbot/"
+              data-instgrm-version="14"></blockquote>
+          </div>
+          <button class="carousel-btn next" aria-label="Next">&#8594;</button>
+        </div>
+        <div class="carousel-dots" id="igDots">
+          <button class="carousel-dot active"></button>
+          <button class="carousel-dot"></button>
+          <button class="carousel-dot"></button>
+          <button class="carousel-dot"></button>
         </div>
       </div>
     </div>
@@ -1519,6 +1577,41 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+    (function () {
+      const carousel = document.getElementById('igCarousel');
+      const dots = document.querySelectorAll('#igDots .carousel-dot');
+      if (!carousel) return;
+
+      function getIndex() {
+        const itemWidth = carousel.firstElementChild
+          ? carousel.firstElementChild.getBoundingClientRect().width + 24
+          : carousel.scrollWidth / dots.length;
+        return Math.round(carousel.scrollLeft / itemWidth);
+      }
+
+      function scrollTo(idx) {
+        const items = carousel.children;
+        if (!items[idx]) return;
+        carousel.scrollLeft = items[idx].offsetLeft - (carousel.offsetWidth - items[idx].offsetWidth) / 2;
+      }
+
+      function updateDots() {
+        const idx = getIndex();
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      carousel.addEventListener('scroll', updateDots, { passive: true });
+
+      document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+        scrollTo(Math.max(0, getIndex() - 1));
+      });
+      document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+        scrollTo(Math.min(dots.length - 1, getIndex() + 1));
+      });
+
+      dots.forEach((dot, i) => dot.addEventListener('click', () => scrollTo(i)));
+    })();
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
