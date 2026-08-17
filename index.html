@@ -905,6 +905,55 @@
 
     .carousel-dot.active { background: var(--ink); }
 
+    .media-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    @media (max-width: 900px) {
+      .media-pair { grid-template-columns: 1fr; }
+    }
+
+    .instagram-strip {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .img-carousel-strip {}
+
+    .img-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+
+    .img-slide-inner {
+      aspect-ratio: 1 / 1;
+      background: var(--bg-soft);
+      border: 1px dashed var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      overflow: hidden;
+    }
+
+    .img-slide-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .img-slide-inner svg { width: 34px; height: 34px; opacity: 0.2; }
+
     /* ── Footer ───────────────────────────────────────────────── */
     footer {
       background: var(--ink);
@@ -1262,44 +1311,93 @@
           <h3>DJ Services</h3>
           <p>Professional DJ services for weddings, corporate events, private parties, and live performances across the Hawaiian Islands.</p>
         </div>
-      <!-- Instagram carousel -->
-      <div class="instagram-strip">
-        <div class="instagram-strip-header">
-          <span class="section-label">Follow the Work</span>
-          <a href="https://www.instagram.com/qbmediahi/" class="instagram-handle" target="_blank" rel="noopener">@qbmediahi</a>
-          <div class="carousel-controls">
-            <button class="carousel-btn prev" aria-label="Previous">&#8592;</button>
-            <button class="carousel-btn next" aria-label="Next">&#8594;</button>
+      <!-- Media pair: Instagram + Image carousels -->
+      <div class="media-pair">
+
+        <!-- Instagram carousel -->
+        <div class="instagram-strip">
+          <div class="instagram-strip-header">
+            <span class="section-label">Follow the Work</span>
+            <a href="https://www.instagram.com/qbmediahi/" class="instagram-handle" target="_blank" rel="noopener">@qbmediahi</a>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev" data-carousel="igCarousel" aria-label="Previous">&#8592;</button>
+              <button class="carousel-btn next" data-carousel="igCarousel" aria-label="Next">&#8594;</button>
+            </div>
+          </div>
+          <div class="instagram-carousel" id="igCarousel">
+            <div class="ig-slide">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DLeGK0hOXZl/"
+                data-instgrm-version="14"></blockquote>
+            </div>
+            <div class="ig-slide">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DRHOJQdke0k/"
+                data-instgrm-version="14"></blockquote>
+            </div>
+            <div class="ig-slide">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DVsH04slDjQ/"
+                data-instgrm-version="14"></blockquote>
+            </div>
+            <div class="ig-slide">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/p/DXCzwyUgbot/"
+                data-instgrm-version="14"></blockquote>
+            </div>
+          </div>
+          <div class="carousel-dots" id="igDots">
+            <button class="carousel-dot active"></button>
+            <button class="carousel-dot"></button>
+            <button class="carousel-dot"></button>
+            <button class="carousel-dot"></button>
           </div>
         </div>
-        <div class="instagram-carousel" id="igCarousel">
-          <div class="ig-slide">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DLeGK0hOXZl/"
-              data-instgrm-version="14"></blockquote>
+
+        <!-- Image carousel -->
+        <div class="img-carousel-strip">
+          <div class="instagram-strip-header">
+            <span class="section-label">Gallery</span>
+            <div class="carousel-controls">
+              <button class="carousel-btn prev" data-carousel="imgCarousel" aria-label="Previous">&#8592;</button>
+              <button class="carousel-btn next" data-carousel="imgCarousel" aria-label="Next">&#8594;</button>
+            </div>
           </div>
-          <div class="ig-slide">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/reel/DRHOJQdke0k/"
-              data-instgrm-version="14"></blockquote>
+          <div class="instagram-carousel" id="imgCarousel">
+            <div class="img-slide">
+              <!-- Replace with: <img src="your-photo.jpg" alt="..." /> -->
+              <div class="img-slide-inner">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <span>Add Photo</span>
+              </div>
+            </div>
+            <div class="img-slide">
+              <div class="img-slide-inner">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <span>Add Photo</span>
+              </div>
+            </div>
+            <div class="img-slide">
+              <div class="img-slide-inner">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <span>Add Photo</span>
+              </div>
+            </div>
+            <div class="img-slide">
+              <div class="img-slide-inner">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <span>Add Photo</span>
+              </div>
+            </div>
           </div>
-          <div class="ig-slide">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DVsH04slDjQ/"
-              data-instgrm-version="14"></blockquote>
-          </div>
-          <div class="ig-slide">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DXCzwyUgbot/"
-              data-instgrm-version="14"></blockquote>
+          <div class="carousel-dots" id="imgDots">
+            <button class="carousel-dot active"></button>
+            <button class="carousel-dot"></button>
+            <button class="carousel-dot"></button>
+            <button class="carousel-dot"></button>
           </div>
         </div>
-        <div class="carousel-dots" id="igDots">
-          <button class="carousel-dot active"></button>
-          <button class="carousel-dot"></button>
-          <button class="carousel-dot"></button>
-          <button class="carousel-dot"></button>
-        </div>
+
       </div>
     </div>
   </section>
@@ -1588,9 +1686,9 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
-    (function () {
-      const carousel = document.getElementById('igCarousel');
-      const dots = document.querySelectorAll('#igDots .carousel-dot');
+    function initCarousel(carouselId, dotsId) {
+      const carousel = document.getElementById(carouselId);
+      const dots = document.querySelectorAll('#' + dotsId + ' .carousel-dot');
       if (!carousel) return;
 
       function getIndex() {
@@ -1608,10 +1706,17 @@
       }
 
       carousel.addEventListener('scroll', updateDots, { passive: true });
-      document.querySelector('.carousel-btn.prev').addEventListener('click', () => goTo(getIndex() - 1));
-      document.querySelector('.carousel-btn.next').addEventListener('click', () => goTo(getIndex() + 1));
       dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-    })();
+
+      document.querySelectorAll('[data-carousel="' + carouselId + '"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          goTo(getIndex() + (btn.classList.contains('next') ? 1 : -1));
+        });
+      });
+    }
+
+    initCarousel('igCarousel', 'igDots');
+    initCarousel('imgCarousel', 'imgDots');
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
