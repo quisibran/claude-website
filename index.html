@@ -155,6 +155,12 @@
       width: auto;
       filter: invert(1);
       transition: filter 0.3s;
+      animation: navLogoPulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes navLogoPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.06); opacity: 0.88; }
     }
 
     .nav-links {
@@ -327,7 +333,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-loader-logo, .hero-loader-ring { animation: none; }
+      .hero-loader-logo, .hero-loader-ring, .nav-logo-img { animation: none; }
     }
 
     .hero-content {
@@ -970,7 +976,7 @@
       </div>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 24, 2026 · 3:24 PM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 24, 2026 · 3:28 PM HST</span>
     </div>
   </footer>
 
