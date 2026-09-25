@@ -294,8 +294,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 1.5rem;
       background: linear-gradient(170deg, #1c4d70 0%, #123a56 50%, #0a2439 100%);
       transition: opacity 0.7s ease, visibility 0.7s ease;
     }
@@ -314,26 +312,13 @@
       animation: heroLoaderPulse 1.8s ease-in-out infinite;
     }
 
-    .hero-loader-ring {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-top-color: rgba(255,255,255,0.85);
-      animation: heroLoaderSpin 0.85s linear infinite;
-    }
-
     @keyframes heroLoaderPulse {
       0%, 100% { opacity: 0.55; transform: scale(1); }
       50%      { opacity: 1;    transform: scale(1.08); }
     }
 
-    @keyframes heroLoaderSpin {
-      to { transform: rotate(360deg); }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      .hero-loader-logo, .hero-loader-ring, .nav-logo-img { animation: none; }
+      .hero-loader-logo, .nav-logo-img { animation: none; }
     }
 
     .hero-content {
@@ -835,7 +820,6 @@
   </div>
     <div class="hero-loader" id="heroLoader" aria-hidden="true">
       <img src="QB-4.svg" class="hero-loader-logo" alt="" />
-      <span class="hero-loader-ring"></span>
     </div>
     <div class="hero-content">
       <span class="hero-tag">Based in Hawaii &bull; Available Statewide</span>
@@ -976,7 +960,7 @@
       </div>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 25, 2026 · 9:24 AM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 25, 2026 · 9:26 AM HST</span>
     </div>
   </footer>
 
