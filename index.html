@@ -268,13 +268,66 @@
       inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
+
+    .hero-video.is-ready { opacity: 1; }
 
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(8, 28, 45, 0.35);
+    }
+
+    .hero-loader {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: linear-gradient(170deg, #1c4d70 0%, #123a56 50%, #0a2439 100%);
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .hero-loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .hero-loader-logo {
+      width: 56px;
+      height: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+      animation: heroLoaderPulse 1.8s ease-in-out infinite;
+    }
+
+    .hero-loader-ring {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: rgba(255,255,255,0.85);
+      animation: heroLoaderSpin 0.85s linear infinite;
+    }
+
+    @keyframes heroLoaderPulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 1;    transform: scale(1.08); }
+    }
+
+    @keyframes heroLoaderSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-loader-logo, .hero-loader-ring { animation: none; }
     }
 
     .hero-content {
@@ -770,10 +823,14 @@
   <!-- ── Hero ──────────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-bg">
-    <video class="hero-video" autoplay muted loop playsinline>
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
       <source src="tunnels.mov" type="video/mp4" />
     </video>
   </div>
+    <div class="hero-loader" id="heroLoader" aria-hidden="true">
+      <img src="QB-4.svg" class="hero-loader-logo" alt="" />
+      <span class="hero-loader-ring"></span>
+    </div>
     <div class="hero-content">
       <span class="hero-tag">Based in Hawaii &bull; Available Statewide</span>
       <h1 class="hero-title">
@@ -913,12 +970,47 @@
       </div>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 24, 2026 · 3:17 PM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 24, 2026 · 3:24 PM HST</span>
     </div>
   </footer>
 
   <!-- ── JavaScript ─────────────────────────────────────────── -->
   <script>
+    // Hero video loader
+    (function () {
+      const loader = document.getElementById('heroLoader');
+      const video = document.getElementById('heroVideo');
+      if (!loader) return;
+
+      const MIN_DISPLAY = 400;
+      const MAX_WAIT = 4000;
+      const shownAt = Date.now();
+      let hidden = false;
+
+      function hideLoader() {
+        if (hidden) return;
+        hidden = true;
+        const wait = Math.max(0, MIN_DISPLAY - (Date.now() - shownAt));
+        setTimeout(() => {
+          loader.classList.add('is-hidden');
+          if (video) video.classList.add('is-ready');
+        }, wait);
+      }
+
+      if (video) {
+        if (video.readyState >= 3) {
+          hideLoader();
+        } else {
+          video.addEventListener('canplay', hideLoader, { once: true });
+          video.addEventListener('error', hideLoader, { once: true });
+        }
+      } else {
+        hideLoader();
+      }
+
+      setTimeout(hideLoader, MAX_WAIT);
+    })();
+
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
