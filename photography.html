@@ -128,6 +128,7 @@
       white-space: nowrap;
     }
     .dropdown-menu li a:hover { color: #fff !important; background: rgba(255,255,255,0.05); }
+    .dropdown-menu li a.dropdown-sub { padding-left: 2rem; font-size: 0.6rem; opacity: 0.8; }
     #nav.scrolled .dropdown-menu { background: rgba(210,232,248,0.97); border-color: var(--rule); }
     #nav.scrolled .dropdown-menu li a { color: var(--ink-mid) !important; }
     #nav.scrolled .dropdown-menu li a:hover { color: var(--ink) !important; }
@@ -176,7 +177,9 @@
       color: rgba(255,255,255,0.5);
       display: block;
       margin-bottom: 1rem;
+      transition: color 0.2s;
     }
+    a.section-label:hover { color: rgba(255,255,255,0.85); }
     .page-hero h1 {
       font-family: var(--font-head);
       font-size: clamp(2.4rem, 5vw, 4rem);
@@ -390,8 +393,9 @@
             <a href="portfolio.html">Portfolio</a>
             <ul class="dropdown-menu">
               <li><a href="portfolio.html">All Work</a></li>
-              <li><a href="videography.html">Videography</a></li>
-              <li><a href="photography.html">Photography</a></li>
+              <li><a href="flicks.html">QB Flicks</a></li>
+              <li><a href="videography.html" class="dropdown-sub">Videography</a></li>
+              <li><a href="photography.html" class="dropdown-sub">Photography</a></li>
             </ul>
           </li>
           <li><a href="reviews.html">Reviews</a></li>
@@ -408,7 +412,7 @@
   <!-- ── Page Hero ── -->
   <div class="page-hero">
     <div class="container">
-      <span class="section-label">QB Media Hawaii</span>
+      <a href="flicks.html" class="section-label">QB Flicks by QB Media Hawaii</a>
       <h1>Photography</h1>
       <p>Sports portraits, lifestyle sessions, and events — captured across the Hawaiian Islands.</p>
     </div>
@@ -516,13 +520,14 @@
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="portfolio.html">Portfolio</a>
+        <a href="flicks.html">QB Flicks</a>
         <a href="reviews.html">Reviews</a>
         <a href="index.html#contact">Contact</a>
       </div>
       <span>© 2026 QB Media Hawaii</span>
     </div>
     <div class="container" style="text-align:right; margin-top:1rem;">
-      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 25, 2026 · 9:29 AM HST</span>
+      <span style="font-size:0.62rem; color:rgba(255,255,255,0.18); font-weight:300; letter-spacing:0.06em;">Updated Sep 29, 2026 · 3:45 PM HST</span>
     </div>
   </footer>
 
