@@ -77,22 +77,25 @@
     }
 
     .nav-inner {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       width: min(1120px, 90%);
       margin-inline: auto;
     }
 
-    .nav-logo { display: flex; align-items: center; }
+    .nav-logo { display: flex; align-items: center; justify-content: center; }
     .nav-logo-img { height: 36px; width: auto; }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
+
+    .nav-left  { justify-content: flex-end; }
+    .nav-right { justify-content: flex-start; }
 
     .nav-links a {
       font-family: var(--font-head);
@@ -565,7 +568,33 @@
       .booking-calendar { border-right: none; border-bottom: 1px solid var(--rule); }
       .booking-form-panel { grid-column: 1; }
       .booking-confirm { grid-column: 1; }
-      .nav-links { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-left  { display: none; }
+      .nav-right { display: none; }
+      .nav-toggle { display: flex; justify-self: end; }
+      .nav-left.open, .nav-right.open {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        left: 0; right: 0;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(12px);
+        padding: 0.5rem 0;
+        border-top: 1px solid var(--rule);
+      }
+      .nav-left.open  { top: 100%; }
+      .nav-right.open { top: calc(100% + 2px); }
+      .nav-left.open li, .nav-right.open li { width: 100%; }
+      .nav-left.open a, .nav-right.open a {
+        display: block;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.75rem;
+      }
+      .nav-right.open .nav-cta { margin: 0.5rem 1.5rem; display: inline-flex; }
     }
 
     @media (max-width: 600px) {
@@ -579,20 +608,24 @@
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <!-- ── Navigation ─────────────────────────────────────── -->
   <header>
     <nav id="nav">
-      <div class="nav-inner">
-        <a href="index.html" class="nav-logo">
-          <img src="QB-4.svg" class="nav-logo-img" alt="QB Media" />
-        </a>
-        <ul class="nav-links">
+      <div class="container nav-inner">
+        <ul class="nav-links nav-left" id="navLeft">
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="https://qbflicks.qbmediahi.com" target="_blank" rel="noopener">QB Flicks</a></li>
+        </ul>
+        <a href="index.html" class="nav-logo"><img src="QB-4.svg" class="nav-logo-img" alt="QB Media" /></a>
+        <ul class="nav-links nav-right" id="navRight">
           <li><a href="reviews.html">Reviews</a></li>
           <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="https://calendar.app.google/GeNsUdXbCRWXtxg9A" target="_blank" class="nav-cta">Book Now</a></li>
         </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </nav>
   </header>
@@ -1014,6 +1047,24 @@
     });
 
     renderCalendar();
+
+    const toggle   = document.getElementById('navToggle');
+    const navLeft  = document.getElementById('navLeft');
+    const navRight = document.getElementById('navRight');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        navLeft.classList.toggle('open');
+        navRight.classList.toggle('open');
+      });
+      [navLeft, navRight].forEach(list => {
+        list.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            navLeft.classList.remove('open');
+            navRight.classList.remove('open');
+          });
+        });
+      });
+    }
   </script>
 
 </body>
