@@ -203,6 +203,35 @@
       color: var(--rule);
     }
 
+    .sidebar-policy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .sidebar-policy ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .sidebar-policy li {
+      font-size: 0.78rem;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.6;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .sidebar-policy li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
     /* ── Calendar ─────────────────────────────────────────────── */
     .booking-calendar {
       padding: 3rem;
@@ -687,6 +716,19 @@
         <span>Live Streaming</span>
         <span>Screen &amp; Projection</span>
         <span>Recording Services</span>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-policy">
+        <span class="sidebar-eyebrow">Booking &amp; Payment Policy</span>
+        <ul>
+          <li>Payment is made directly by the client to QB Media Hawaii. No third-party, "management," or business-account payments.</li>
+          <li>No checks, funds, or overpayments sent in advance, and no refunds of "extra" money, ever.</li>
+          <li>Rates and terms are confirmed in writing from kristian@qbmediahi.com before anything is booked.</li>
+          <li>QB Media will never ask you to click a link to "confirm" a payment or send personal account details.</li>
+          <li>The only official contact is kristian@qbmediahi.com or (808) 652-2372. Anyone else claiming to book on my behalf isn't me.</li>
+        </ul>
       </div>
     </aside>
 
