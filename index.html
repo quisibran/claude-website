@@ -144,7 +144,9 @@
 
     .nav-inner {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: auto auto;
+      justify-content: center;
+      column-gap: 2rem;
       align-items: center;
     }
 
@@ -312,7 +314,14 @@
       position: relative;
       text-align: center;
       padding: 2rem 1rem;
-      max-width: 900px;
+      max-width: 1240px;
+    }
+
+    .hero-logo {
+      width: clamp(300px, 92vw, 1200px);
+      height: auto;
+      margin-inline: auto;
+      filter: invert(1) drop-shadow(0 2px 30px rgba(0,0,0,0.35));
     }
 
     .hero-title {
@@ -328,33 +337,17 @@
     }
 
     .hero-tagline {
-      font-family: var(--font-body);
-      font-size: clamp(0.8rem, 1.8vw, 1rem);
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: 0.18em;
-      color: rgba(255,255,255,0.7);
+      font-family: var(--font-head);
+      font-size: clamp(1rem, 2.4vw, 1.6rem);
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: 0.16em;
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.55);
       margin-bottom: 3rem;
     }
 
-    .hero-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.45);
-      font-size: 1.6rem;
-      padding: 1.5rem;
-      cursor: pointer;
-      transition: color 0.2s;
-      z-index: 10;
-      line-height: 1;
-    }
 
-    .hero-arrow:hover { color: rgba(255,255,255,0.9); }
-    .hero-arrow.left  { left: 0.5rem; }
-    .hero-arrow.right { right: 0.5rem; }
 
     .hero-actions {
       display: flex;
@@ -401,34 +394,6 @@
       color: var(--ink);
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255,255,255,0.35);
-      font-family: var(--font-head);
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      animation: scrollpulse 2.5s ease-in-out infinite;
-    }
-
-    .hero-scroll::after {
-      content: '';
-      width: 1px;
-      height: 32px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
-    }
-
-    @keyframes scrollpulse {
-      0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
-      50%       { opacity: 1;   transform: translateX(-50%) translateY(5px); }
-    }
 
     /* ── Explore ──────────────────────────────────────────────── */
     #explore { background: var(--bg-soft); padding: 5rem 0; }
@@ -683,7 +648,6 @@
       .nav-right.open .nav-cta { margin: 0.5rem 1.5rem; display: inline-flex; border-color: rgba(255,255,255,0.6) !important; color: #fff !important; }
 
       /* Hero */
-      .hero-arrow { display: none; }
       .hero-content { padding: 6rem 1.25rem 4rem; }
       .btn { padding: 0.85rem 1.8rem; }
 
@@ -774,7 +738,6 @@
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
         </ul>
-        <a href="#hero" class="nav-logo"><img src="QB-4.svg" class="nav-logo-img" alt="QB Media" /></a>
         <ul class="nav-links nav-right" id="navRight">
           <li><a href="reviews.html">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -797,17 +760,14 @@
     <div class="hero-loader" id="heroLoader" aria-hidden="true">
       <img src="QB-4.svg" class="hero-loader-logo" alt="" />
     </div>
-    <button class="hero-arrow left" aria-label="Previous">&#8592;</button>
     <div class="hero-content">
-      <h1 class="hero-title">QB Media</h1>
+      <h1 class="hero-title"><img src="QB-4.svg" class="hero-logo" alt="QB Media Hawaii" /></h1>
       <p class="hero-tagline">Hawai&#699;i&rsquo;s one stop shop for A/V services</p>
       <div class="hero-actions">
         <a href="portfolio.html" class="btn btn-primary">View Work</a>
         <a href="booking.html" class="btn btn-outline">Book a Call</a>
       </div>
     </div>
-    <button class="hero-arrow right" aria-label="Next">&#8594;</button>
-    <div class="hero-scroll">Scroll</div>
   </section>
 
   <!-- ── Featured By ─────────────────────────────────────── -->
