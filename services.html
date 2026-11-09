@@ -381,6 +381,31 @@
     .footer-links a:hover { color: rgba(255,255,255,0.7); }
 
     /* ── Mobile ── */
+
+    /* ── Audio & Live Event spotlight ── */
+    .av-section { background: var(--hero-dark); color: #fff; padding: 6rem 0; position: relative; }
+    .av-section .section-label { color: var(--muted); }
+    .av-section h2 { font-family: var(--font-head); font-weight: 300; letter-spacing: 0.1em; font-size: clamp(1.6rem, 3.2vw, 2.5rem); line-height: 1.25; margin-bottom: 1.2rem; }
+    .av-lead { max-width: 640px; color: rgba(255,255,255,0.72); font-weight: 300; margin-bottom: 3rem; }
+    .av-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,0.12); border-left: 1px solid rgba(255,255,255,0.12); }
+    .av-item { padding: 2rem 1.6rem; border-right: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.25s; }
+    .av-item:hover { background: rgba(255,255,255,0.04); }
+    .av-item h3 { font-family: var(--font-head); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .av-item p { font-size: 0.9rem; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.65; }
+    .av-events { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+    .av-events span { font-family: var(--font-head); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); }
+    .av-process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
+    .av-step .num { font-family: var(--font-head); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--muted); display: block; margin-bottom: 0.6rem; }
+    .av-step h4 { font-family: var(--font-head); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .av-step p { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 300; line-height: 1.6; }
+    .av-actions { margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .av-btn { display: inline-block; font-family: var(--font-head); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.95rem 2rem; border: 1px solid rgba(255,255,255,0.6); color: #fff; transition: background 0.2s, color 0.2s; }
+    .av-btn:hover { background: #fff; color: var(--hero-dark); }
+    .av-btn.solid { background: #fff; color: var(--hero-dark); }
+    .av-btn.solid:hover { background: transparent; color: #fff; }
+    @media (max-width: 900px) { .av-grid, .av-process { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .av-section { padding: 4rem 0; } .av-grid, .av-process { grid-template-columns: 1fr; } }
+
     @media (max-width: 900px) {
       .services-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -449,7 +474,7 @@
     <div class="container">
       <span class="section-label">What I Offer</span>
       <h1>Full-Service A/V Production</h1>
-      <p>Video, photo, sound, lighting, streaming, and DJ services — one point of contact for your whole event.</p>
+      <p>Audio, live event production, video, photo, lighting, streaming, and DJ services — one point of contact for your whole event.</p>
     </div>
   </div>
 
@@ -487,6 +512,43 @@
           <h3>DJ Services</h3>
           <p>Professional DJ services for weddings, corporate events, private parties, and live performances across the Hawaiian Islands.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── Audio & Live Event Production ── -->
+  <section class="av-section" id="audio">
+    <div class="container">
+      <span class="section-label" data-reveal>Audio &amp; Live Event Production</span>
+      <h2 data-reveal data-reveal-delay="1">Sound that carries the whole room.</h2>
+      <p class="av-lead" data-reveal data-reveal-delay="2">From intimate gatherings to festival-scale stages, QB Media designs, deploys, and runs the full audio and live production for your event across the Hawaiian Islands &mdash; one team, one point of contact, zero guesswork.</p>
+
+      <div class="av-grid">
+        <div class="av-item" data-reveal><h3>PA &amp; Sound Reinforcement</h3><p>Line-array and point-source PA systems, subwoofers, and amplification sized to your venue and crowd &mdash; indoors or outdoors.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="1"><h3>Front-of-House &amp; Monitors</h3><p>Digital console mixing for bands, speakers, and ceremonies, with clean monitor mixes so performers hear exactly what they need.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="2"><h3>Lighting &amp; Staging Effects</h3><p>Console-programmed lighting, LED washes, and uplighting that set the mood and are cued to the show.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="3"><h3>Live Streaming &amp; Video</h3><p>Multi-camera capture and live stream with broadcast-quality audio, so remote audiences get the same experience.</p></div>
+        <div class="av-item" data-reveal><h3>DJ &amp; Entertainment</h3><p>Professional DJ sets and MC support, seamlessly integrated with the sound system we're already running.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="1"><h3>Wireless &amp; Mic Systems</h3><p>Handhelds, lavaliers, headsets, and in-ears with frequency coordination for reliable, interference-free audio.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="2"><h3>Event Recording</h3><p>Multitrack and stereo recording of your event for highlight reels, live albums, and archives.</p></div>
+        <div class="av-item" data-reveal data-reveal-delay="3"><h3>Technical Direction</h3><p>Site surveys, stage plots, input lists, and day-of crew coordination so load-in to load-out runs smoothly.</p></div>
+      </div>
+
+      <div class="av-events" data-reveal>
+        <span>Concerts &amp; Festivals</span><span>Weddings</span><span>Corporate Events</span><span>Conferences</span><span>School &amp; Athletic Events</span><span>Private Parties</span>
+      </div>
+
+      <div class="av-process">
+        <div class="av-step" data-reveal><span class="num">01</span><h4>Consult</h4><p>We learn your event, venue, headcount, and goals.</p></div>
+        <div class="av-step" data-reveal data-reveal-delay="1"><span class="num">02</span><h4>Design</h4><p>A tailored system plan and clear, itemized quote.</p></div>
+        <div class="av-step" data-reveal data-reveal-delay="2"><span class="num">03</span><h4>Deploy</h4><p>Professional setup, line check, and sound check before doors open.</p></div>
+        <div class="av-step" data-reveal data-reveal-delay="3"><span class="num">04</span><h4>Run</h4><p>A dedicated engineer mixes live, start to finish, and handles teardown.</p></div>
+      </div>
+
+      <div class="av-actions" data-reveal>
+        <a href="booking.html" class="av-btn solid">Book a Call</a>
+        <a href="index.html#contact" class="av-btn">Request a Quote</a>
       </div>
     </div>
   </section>
