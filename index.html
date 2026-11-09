@@ -38,10 +38,6 @@
     },
     "areaServed": "Hawaii",
     "priceRange": "$$",
-    "founder": {
-      "@type": "Person",
-      "name": "Kristian Bran"
-    },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -777,7 +773,6 @@
         <ul class="nav-links nav-left" id="navLeft">
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="https://qbflicks.qbmediahi.com" target="_blank" rel="noopener">QB Flicks</a></li>
         </ul>
         <a href="#hero" class="nav-logo"><img src="QB-4.svg" class="nav-logo-img" alt="QB Media" /></a>
         <ul class="nav-links nav-right" id="navRight">
@@ -868,7 +863,7 @@
         <div class="av-item" data-reveal data-reveal-delay="1"><h3>Front-of-House &amp; Monitors</h3><p>Digital console mixing for bands, speakers, and ceremonies, with clean monitor mixes so performers hear exactly what they need.</p></div>
         <div class="av-item" data-reveal data-reveal-delay="2"><h3>Lighting &amp; Staging Effects</h3><p>Console-programmed lighting, LED washes, and uplighting that set the mood and are cued to the show.</p></div>
         <div class="av-item" data-reveal data-reveal-delay="3"><h3>Live Streaming &amp; Video</h3><p>Multi-camera capture and live stream with broadcast-quality audio, so remote audiences get the same experience.</p></div>
-        <div class="av-item" data-reveal><h3>DJ &amp; Entertainment</h3><p>Professional DJ sets and MC support, seamlessly integrated with the sound system we're already running.</p></div>
+        <div class="av-item" data-reveal><h3>DJ &amp; Entertainment</h3><p>Professional DJ sets and MC support, seamlessly integrated with the event's sound system.</p></div>
         <div class="av-item" data-reveal data-reveal-delay="1"><h3>Wireless &amp; Mic Systems</h3><p>Handhelds, lavaliers, headsets, and in-ears with frequency coordination for reliable, interference-free audio.</p></div>
         <div class="av-item" data-reveal data-reveal-delay="2"><h3>Event Recording</h3><p>Multitrack and stereo recording of your event for highlight reels, live albums, and archives.</p></div>
         <div class="av-item" data-reveal data-reveal-delay="3"><h3>Technical Direction</h3><p>Site surveys, stage plots, input lists, and day-of crew coordination so load-in to load-out runs smoothly.</p></div>
@@ -879,7 +874,7 @@
       </div>
 
       <div class="av-process">
-        <div class="av-step" data-reveal><span class="num">01</span><h4>Consult</h4><p>We learn your event, venue, headcount, and goals.</p></div>
+        <div class="av-step" data-reveal><span class="num">01</span><h4>Consult</h4><p>QB Media learns your event, venue, headcount, and goals.</p></div>
         <div class="av-step" data-reveal data-reveal-delay="1"><span class="num">02</span><h4>Design</h4><p>A tailored system plan and clear, itemized quote.</p></div>
         <div class="av-step" data-reveal data-reveal-delay="2"><span class="num">03</span><h4>Deploy</h4><p>Professional setup, line check, and sound check before doors open.</p></div>
         <div class="av-step" data-reveal data-reveal-delay="3"><span class="num">04</span><h4>Run</h4><p>A dedicated engineer mixes live, start to finish, and handles teardown.</p></div>
@@ -900,8 +895,8 @@
           <span class="section-label" data-reveal>Get in Touch</span>
           <h2 class="section-title" data-reveal data-reveal-delay="1">Let's Work Together</h2>
           <p>
-            Have an event coming up? Want to talk through a project? Reach out and I'll
-            get back to you within 24 hours.
+            Have an event coming up? Want to talk through a project? Reach out and QB Media will
+            respond within 24 hours.
           </p>
           <div class="contact-details">
             <div class="contact-item">
@@ -952,7 +947,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="message">Tell Me About Your Event</label>
+            <label for="message">Event Details</label>
             <textarea id="message" name="message" placeholder="Date, location, type of event, estimated attendance…" required></textarea>
           </div>
           <button type="submit" class="btn form-submit">Send Message</button>
@@ -966,7 +961,7 @@
   <footer>
     <div class="container footer-inner">
       <div class="footer-logo"><img src="QB-4.svg" class="footer-logo-img" alt="QB Media" /></div>
-      <p class="footer-copy">&copy; 2026 Kristian Bran DBA QB Media Hawaii. All rights reserved.</p>
+      <p class="footer-copy">&copy; 2026 QB Media Hawaii. All rights reserved.</p>
       <div class="footer-socials">
         <a href="https://www.instagram.com/qbmediahi/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">📸</a>
         <a href="#" class="social-link" aria-label="Facebook">📘</a>
@@ -1050,7 +1045,7 @@
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const status = document.getElementById('formStatus');
-      status.textContent = '✓ Message sent! I\'ll be in touch within 24 hours.';
+      status.textContent = '✓ Message sent! QB Media will be in touch within 24 hours.';
       status.style.display = 'block';
       this.reset();
       setTimeout(() => { status.style.display = 'none'; }, 6000);
